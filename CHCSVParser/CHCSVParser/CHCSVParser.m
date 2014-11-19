@@ -860,8 +860,13 @@ NSArray *_CHCSVParserParse(NSInputStream *inputStream, CHCSVParserOptions option
 }
 
 - (instancetype)initWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt {
-    return [self initWithObjects:[NSArray arrayWithObjects:objects count:cnt]
-                         forKeys:[NSArray arrayWithObjects:keys count:cnt]];
+    self = [super init];
+    if (self) {
+        _keys = [NSArray arrayWithObjects:keys count:cnt].copy;
+        _values = [NSArray arrayWithObjects:objects count:cnt].copy;
+        _dictionary = [NSDictionary dictionaryWithObjects:_values forKeys:_keys];
+    }
+    return self;
 }
 
 - (NSArray *)allKeys {
