@@ -41,6 +41,9 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
 
 @interface CHCSVParser ()
 @property (assign) NSUInteger totalBytesRead;
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+
 @end
 
 @implementation CHCSVParser {
@@ -63,6 +66,8 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
     NSUInteger _currentRecord;
     BOOL _cancelled;
 }
+
+- (instancetype)init { @throw nil; }
 
 - (id)initWithCSVString:(NSString *)csv {
     return [self initWithDelimitedString:csv delimiter:COMMA];
@@ -563,6 +568,12 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
 
 @end
 
+@interface CHCSVWriter ()
+
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+
+@end
+
 @implementation CHCSVWriter {
     NSOutputStream *_stream;
     NSStringEncoding _streamEncoding;
@@ -573,6 +584,8 @@ NSString *const CHCSVErrorDomain = @"com.davedelong.csv";
     
     NSUInteger _currentField;
 }
+
+- (instancetype)init { @throw nil; }
 
 - (instancetype)initForWritingToCSVFile:(NSString *)path {
     NSOutputStream *stream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
